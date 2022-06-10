@@ -23,7 +23,6 @@ class UserSeeder extends Seeder
 
         DB::table('profiles')->insert([
             'image' => "public/mySource/imgs/avatars/unknow.jpg",
-            'email' => "haovnt187@gmail.com",
             'user_id' => 1,
         ]);
     }
