@@ -178,7 +178,7 @@ return [
 
 
         'Intervention\Image\ImageServiceProvider',
-        Barryvdh\DomPDF\ServiceProvider::class,
+//        Barryvdh\DomPDF\ServiceProvider::class,
 //        Meneses\LaravelMpdf\LaravelMpdfServiceProvider::class
     ],
 
@@ -234,7 +234,7 @@ return [
 
 
         'ImageResize' => 'Intervention\Image\Facades\Image',
-        'PDF' => Barryvdh\DomPDF\Facade::class,
+//        'PDF' => Barryvdh\DomPDF\Facade::class,
 //        'PDF' => Meneses\LaravelMpdf\Facades\LaravelMpdf::class,
     ],
 
