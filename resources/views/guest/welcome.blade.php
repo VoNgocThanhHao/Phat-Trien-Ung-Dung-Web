@@ -573,7 +573,7 @@
                                         điểm mạnh nhất của iPhone thế hệ mới.
                                     </p>
                                 </div>
-                                <div class="button left-to-right">
+                                <div class="button left-to-right linkIphone13">
                                     <button style="color: black !important;">
                                         Xem chi tiết
                                     </button>

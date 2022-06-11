@@ -90,7 +90,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group col-3">
+                            <div class="form-group col-3" hidden>
                                 <label for="discountProduct">Giảm giá:</label>
                                 <div  class="input-group">
                                     <input type="number" class="form-control" id="discountProduct" placeholder="Giảm giá"
