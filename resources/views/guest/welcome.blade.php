@@ -703,7 +703,7 @@
         var start_anim = function () {
             var scroll = $(window).scrollTop();
             // console.log(scroll)
-            if (scroll >= 2700) {
+            if (scroll >= 1400) {
                 slideControlItems[slideIndex].classList.add('active')
                 slides[slideIndex].classList.add('active')
             }
