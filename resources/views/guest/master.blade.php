@@ -205,7 +205,7 @@
                             @endif
                         </a>
                         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="min-width: 0">
-                            <span class="dropdown-item text-center" style="font-weight: bolder">Võ Ngọc Thanh Hào</span>
+                            <span class="dropdown-item text-center" style="font-weight: bolder">{{ Auth::user()->name }}</span>
                             <div class="dropdown-divider"></div>
                             <button class="dropdown-item btnInfo">
                                 <i class="fa-solid fa-circle-info mr-2"></i> Thông tin cá nhân
