@@ -38,7 +38,7 @@
                     <button type="button" class="btn btn-outline-danger float-left ml-4 btnAddFav" data="{{ $product->id }}"
                             style="border-radius: 50%"><i class="fa-solid fa-heart-circle-plus"></i>
                     </button>
-                    <button type="button" class="btn btn-outline-secondary float-none text-white btnBuy" data="{{ $product }}"
+                    <button type="button" class="btn btn-outline-secondary float-none text-white btnBuy" data="{{ json_encode($product) }}"
                             style="border-radius: 100px">MUA NGAY
                     </button>
                     <a href="{{ action('App\Http\Controllers\productController@getViewProductDetail', $product->id) }}" type="button" class="btn btn-outline-primary float-right mr-4"

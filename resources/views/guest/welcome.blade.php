@@ -439,7 +439,7 @@
             </div>
             <div class="mt-5">
                 <div class="row text-center">
-                    <div class="col-md-6">
+                    <div class="col-md-6 linkGalaxy">
                         <div class="parent p-5" style="">
                             <img class="child"
                                  src="{{ asset('public/mySource/test/bce7f60cae394fed667769087723a49a.jpg') }}" alt="">
@@ -448,13 +448,13 @@
 
                     <div class="col-md-6 row">
 
-                        <div class="col-md-12">
+                        <div class="col-md-12 linkIphone13">
                             <div class="parent p-5" style="">
                                 <img class="child" src="{{ asset('public/mySource/test/iPhone-13-Pro-2.png') }}" alt="">
                             </div>
                         </div>
 
-                        <div class="col-md-12 ">
+                        <div class="col-md-12 linkS22Ultra">
                             <div class="parent p-5" style="">
                                 <img class="child"
                                      src="{{ asset('public/mySource/test/Samsung-Galaxy-S22-Ultra-3.jpg') }}"
@@ -716,6 +716,19 @@
             $(window).scroll(function () {
                 start_anim()
             });
+
+
+            $('.linkGalaxy').click(function () {
+                window.location.href = '{{ action('App\Http\Controllers\productController@getViewProductDetail', 1) }}'
+            })
+
+            $('.linkIphone13').click(function () {
+                window.location.href = '{{ action('App\Http\Controllers\productController@getViewProductDetail', 2) }}'
+            })
+
+            $('.linkS22Ultra').click(function () {
+                window.location.href = '{{ action('App\Http\Controllers\productController@getViewProductDetail', 3) }}'
+            })
 
         })
 
