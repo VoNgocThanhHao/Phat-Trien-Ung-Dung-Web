@@ -111,7 +111,7 @@ class billController extends Controller
             }
 
             $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-            $vnp_Returnurl = "http://mymine.local/hoa-don-thanh-toan";
+            $vnp_Returnurl = "http://27.75.53.144/hoa-don-thanh-toan";
             $vnp_TmnCode = "B8H7M5Z6";//Mã website tại VNPAY
             $vnp_HashSecret = "SPPWTLAJVSZOBOZGOLJNTHYCNBZNQNPA"; //Chuỗi bí mật
 
