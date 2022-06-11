@@ -431,7 +431,6 @@
                                 icon: 'error',
                                 title: 'Thao tác thất bại',
                                 text: result.message,
-                                timer: 1000,
                             })
                         }
                     }
