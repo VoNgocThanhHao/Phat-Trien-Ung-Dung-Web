@@ -50,7 +50,7 @@ class productController extends Controller
 
     public function addProduct(Request $request){
 
-//        try {
+        try {
             $product = new productModel;
 
             $product->name = $request->name;
@@ -132,10 +132,10 @@ class productController extends Controller
 
             $product->save();
 
-//            return ToolsModel::status('Sản phẩm đã được thêm!', 200);
-//        }catch (\Exception $exception){
-//            return ToolsModel::status('Máy chủ không phản hồi!', 500);
-//        }
+            return ToolsModel::status('Sản phẩm đã được thêm!', 200);
+        }catch (\Exception $exception){
+            return ToolsModel::status('Máy chủ không phản hồi!', 500);
+        }
 
     }
 
