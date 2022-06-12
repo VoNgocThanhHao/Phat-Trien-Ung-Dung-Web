@@ -223,7 +223,7 @@ class billController extends Controller
                 return $html;
             })->addColumn('payment', function ($row) {
                 $html = '';
-                if ($row->type == 1 || ($row->type == 0 && $row->payment) ){
+                if ( $row->payment ){
                         $html = '<div class="custom-control custom-checkbox">
                         <input class="custom-control-input" type="checkbox" id="customCheckbox2" checked="" disabled="">
                         <label for="customCheckbox2" class="custom-control-label"></label>

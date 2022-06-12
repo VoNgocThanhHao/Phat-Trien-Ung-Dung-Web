@@ -67,7 +67,7 @@
                                 <b>Ngày thanh toán:</b>
                                 @if($bill->type == 0)
                                     @if($bill->payment) {{ $bill->payment->format('d-m-Y') }}
-                                    @else Khi nhận hàng
+                                    @else Chưa thanh toán
                                     @endif
                                 @else
                                     {{ $bill->created_at->format('d-m-Y') }}

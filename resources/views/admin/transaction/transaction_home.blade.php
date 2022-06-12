@@ -126,6 +126,12 @@
                     }else{
                         $('#stt_bill').val(0)
                     }
+                }else{
+                    Swal.fire(
+                        'Thành công!',
+                        result.message,
+                        'success'
+                    )
                 }
 
                 $('.btnUpdate').attr('data',data.id)
