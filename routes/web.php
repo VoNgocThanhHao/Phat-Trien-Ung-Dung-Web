@@ -47,6 +47,10 @@ Route::get('/guest-logout', function () {
 
 Route::group(['middleware' => 'checkLogin'], function () {
 
+//    Xác thực tài khoản
+    Route::post('/send-email-verify', 'App\Http\Controllers\userController@sendVerifyEmail');
+    Route::get('/receive-email-verify/{user_id}/{token}', 'App\Http\Controllers\userController@receiveVerifyEmail');
+
 //    Thông tin cá nhân
     Route::post('/cap-nhat-tai-khoan', 'App\Http\Controllers\profileController@updateGuest');
 
@@ -88,7 +92,7 @@ Route::group(['middleware' => 'checkLogin'], function () {
 Route::get('/test', function () {
 //    Auth::attempt(['email'=>'elonmusk@gmail.com','password'=>'123456']);
 
-    return '1';
+    return view('guest.responseEmail.verified');
 });
 
 Route::get('/admin-logout', function () {
@@ -107,7 +111,8 @@ Route::group(['middleware' => 'checkLogin'], function () {
     Route::group(['middleware' => 'checkRole'], function () {
 
         Route::get('/admin', function () {
-            return view('admin.welcome');
+            $qty_brand = \App\Models\brandModel::all()->count();
+            return view('admin.welcome', ['qty_brand'=>$qty_brand]);
         })->name('home-admin');
 
         Route::prefix('admin/tin-nhan')->group(function () {
@@ -177,7 +182,11 @@ Route::group(['middleware' => 'checkLogin'], function () {
             Route::post('/cap-nhat-don-hang', 'App\Http\Controllers\billController@updateBill');
 
             Route::get('/get-data-table', 'App\Http\Controllers\billController@getDataTableAdmin');
+            Route::get('/get-data-table-for-user/{id_user}', 'App\Http\Controllers\billController@getDataTableAdminForUser');
         });
     });
 });
 
+// Quên mật khẩu
+Route::post('/send-code-reset-password', 'App\Http\Controllers\userController@sendCodeResetPass');
+Route::post('/receive-code-reset-password', 'App\Http\Controllers\userController@resetPass');

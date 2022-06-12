@@ -225,7 +225,7 @@
                             </button>
                             @if(Auth::user()->email_verified_at == null)
                                 <div class="dropdown-divider"></div>
-                                <button class="dropdown-item">
+                                <button class="dropdown-item btnVerifyEmail">
                                     <i class="fa-solid fa-envelope mr-2"></i> Xác thực email
                                     <span class="float-right text-white text-sm badge badge-danger"> ! </span>
                                 </button>
@@ -409,12 +409,58 @@
                         Bạn chưa có tài khoản? <a href="#" class="text-primary text-center btnRegisShow" style="">Đăng
                             ký</a>
                     </p>
+                    <p class="ml-3">
+                        <a href="#" class="text-primary text-center btnForgetPass" style="">Quên mật khẩu</a>
+                    </p>
+
 
                 </div>
 
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default btnCloseLogin">Đóng</button>
                     <button type="button" class="btn btn-primary btnLogin">Đăng nhập</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+
+
+    <div class="modal fade" id="modalReset">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Đổi mật khẩu</h4>
+                    <button type="button" class="close btnCloseReset" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="">Mã xác nhận:</label>
+                        <input type="text" class="form-control codeReset">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Mật khẩu mới:</label>
+                        <input type="password" class="form-control passUserNew">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Xác nhận mật khẩu:</label>
+                        <input type="password" class="form-control passUserNew2">
+                    </div>
+
+
+                </div>
+
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default btnCloseReset">Đóng</button>
+                    <button type="button" class="btn btn-primary btnReset">Đổi mật khẩu</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -447,6 +493,12 @@
                         <label for="">Mật khẩu:</label>
                         <input type="password" class="form-control passUser">
                         <span class="text-danger sttPass"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Xác nhận mật khẩu:</label>
+                        <input type="password" class="form-control passUser">
+                        <span class="text-danger sttPass2"></span>
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between">
@@ -979,6 +1031,15 @@
 
         $(document).on('click', '.btnBuy', function () {
             @if(Auth::user())
+
+            @if(Auth::user()->email_verified_at == null)
+            Swal.fire(
+                'Không đủ điều kiện!',
+                'Hãy xác thực tài khoản của bạn trước khi tiến hành giao dịch',
+                'warning'
+            )
+            @else
+
             var data = jQuery.parseJSON($(this).attr('data'))
             var img_link = data.image
 
@@ -992,6 +1053,7 @@
 
             $('.btnBuyConfirm').attr('data', data.id)
             $('#modalBuy').modal('show')
+            @endif
             @else
 
             $('.btnLoginModal').click()
@@ -1158,6 +1220,14 @@
                 Toast.fire({
                     icon: 'error',
                     title: 'Mật khẩu không hợp lệ!'
+                })
+                return;
+            }
+
+            if ($('.sttPass').val() !== $('.sttPass2').val()){
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Mật khẩu không thông nhất!'
                 })
                 return;
             }
@@ -1563,6 +1633,197 @@
             }
 
         });
+
+
+        @if(Auth::user())
+
+        $('.btnVerifyEmail').click(function () {
+
+            Swal.showLoading();
+
+            Swal.fire({
+                title: 'Xác nhận?',
+                text: "Email xác thực sẽ được gửi đến email của bạn!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Xác nhận',
+                cancelButtonText: 'Hủy',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    let timerInterval
+                    Swal.fire({
+                        title: 'Đang xử lý ...',
+                        timerProgressBar: true,
+                        allowOutsideClick: false,
+                        didOpen: () => {
+                            Swal.showLoading()
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval)
+                        }
+                    }).then((result) => {})
+
+                    $.ajax({
+                        url: '{{ action('App\Http\Controllers\userController@sendVerifyEmail') }}',
+                        type: "POST",
+                        data: {
+                        },
+                        success: function (result) {
+                            Swal.hideLoading();
+                            result = JSON.parse(result);
+                            if (result.status === 200) {
+                                Swal.fire(
+                                    'Email đã được gửi!',
+                                    result.message,
+                                    'success'
+                                )
+                            } else {
+                                Swal.fire(
+                                    'Hãy thử lại sau!',
+                                    result.message,
+                                    'error'
+                                )
+                            }
+                        }
+                    });
+                }
+            })
+
+        })
+        @endif
+
+
+        $('.btnForgetPass').click(async function () {
+
+            $('#modalLogin').modal('hide')
+
+            Swal.showLoading();
+
+
+            const {value: email} = await Swal.fire({
+                title: 'Quên mật khẩu',
+                input: 'text',
+                inputLabel: 'Hãy nhập email của bạn',
+                showCancelButton: true,
+                cancelButtonText: 'Hủy',
+                reverseButtons: true,
+                inputValidator: (value) => {
+                    if (!value) {
+                        return 'Email không được bỏ trống!'
+                    }
+                }
+            })
+
+
+            if (email) {
+                $('.btnReset').attr('data',email)
+
+                let timerInterval
+                Swal.fire({
+                    title: 'Đang xử lý ...',
+                    timerProgressBar: true,
+                    didOpen: () => {
+                        Swal.showLoading()
+                    },
+                    willClose: () => {
+                        clearInterval(timerInterval)
+                    }
+                }).then((result) => {
+                })
+
+                $.ajax({
+                    url: '{{ action('App\Http\Controllers\userController@sendCodeResetPass') }}',
+                    type: "POST",
+                    data: {
+                        'email': `${email}`,
+                    },
+                    success: function (result) {
+                        Swal.hideLoading();
+                        result = JSON.parse(result);
+                        if (result.status === 200) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Thao tác thành công',
+                                text: result.message,
+                            })
+                            $('#modalReset').modal('show')
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Thao tác thất bại',
+                                text: result.message,
+                                showConfirmButton: true,
+                            })
+                        }
+                    }
+                });
+
+            }
+
+        })
+
+
+        $('.btnCloseReset').click(function () {
+            $('#modalReset').modal('hide')
+            $('.codeReset').val('')
+            $('.passUserNew').val('')
+            $('.passUserNew2').val('')
+        })
+
+
+        $('.btnReset').click(function () {
+            if ($('.passUserNew').val().length < 6){
+                Toast.fire({
+                    icon: 'warning',
+                    title: 'Mật khẩu phải từ 6 ký tự trở lên!'
+                })
+                return;
+            }
+
+            if ($('.passUserNew').val() !== $('.passUserNew2').val()){
+                Toast.fire({
+                    icon: 'warning',
+                    title: 'Mật khẩu không thống nhất!'
+                })
+                return;
+            }
+
+            var uEmail = $(this).attr('data')
+
+            $.ajax({
+                url: '{{ action('App\Http\Controllers\userController@resetPass') }}',
+                type: "POST",
+                data: {
+                    'token': $('.codeReset').val(),
+                    'password': $('.passUserNew').val(),
+                    'email': uEmail,
+                },
+                success: function (result) {
+                    Swal.hideLoading();
+                    result = JSON.parse(result);
+                    if (result.status === 200) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Thao tác thành công',
+                            text: result.message,
+                            showConfirmButton: true,
+                        })
+                        $('.btnCloseReset').click()
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Thao tác thất bại',
+                            text: result.message,
+                            showConfirmButton: true,
+                        })
+                    }
+                }
+            });
+        })
 
     })
 </script>

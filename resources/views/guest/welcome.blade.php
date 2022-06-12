@@ -421,13 +421,11 @@
         <div class="overlay">
         </div>
         <div class="text">
-            <h2>Never Stop To </h2>
-            <h3>Exploring The World</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat.</p>
-            <a href="#">Explore</a>
+            <h3>Không bao giờ dừng lại</h3>
+            <h4 class="text-white">Phong cách không có giới hạn</h4>
+            <p>Không ai có thể quyết định được phong cách của riêng bạn.
+            Phong cách của mỗi người là duy nhất. Hãy khiến bản thân mình hài lòng
+            với sự giúp đỡ của chúng tôi. <br><br> <h4 class="text-white"> RẤT HÂN HẠNH ĐƯỢC LÀ MỘT PHẦN CỦA BẠN!</h4></p>
         </div>
     </section>
 

@@ -111,7 +111,7 @@ class billController extends Controller
             }
 
             $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-            $vnp_Returnurl = "http://27.75.53.144/hoa-don-thanh-toan";
+            $vnp_Returnurl = "http:/dienmayden.gq/hoa-don-thanh-toan";
             $vnp_TmnCode = "B8H7M5Z6";//Mã website tại VNPAY
             $vnp_HashSecret = "SPPWTLAJVSZOBOZGOLJNTHYCNBZNQNPA"; //Chuỗi bí mật
 
@@ -269,7 +269,42 @@ class billController extends Controller
             return ToolsModel::status('Máy chủ không phản hồi!', 500);
         }
 
+    }
 
+
+    public function getDataTableAdminForUser(Request $request, $id_user){
+        $histories = User::find($id_user)->bill->sortByDesc('created_at');
+        return datatables()->of($histories)
+            ->addIndexColumn()
+            ->addColumn('code', function ($row) {
+                if ($row->read == 0){
+                    $html = $row->code . '<small class="badge badge-danger ml-2"><i class="far fa-clock"></i> new </small>';
+                }else {
+                    $html = $row->code;
+                }
+                return $html;
+            })->addColumn('action', function ($row) {
+                $html = '<div class="btn btn-outline-primary btn-sm mr-2 btnUpdateHis" data = \''.$row.'\'><i class="fa-solid fa-pen-to-square"></i> Cập nhật </div>';
+                $html .= '<div class="btn btn-outline-secondary btn-sm btnDetailHis" data = \''.$row->id.'\'><i class="fa-solid fa-eye"></i> Xem chi tiết </div>';
+                return $html;
+            })->addColumn('created_at', function ($row) {
+                $html = $row->created_at->format('d-m-Y');
+                return $html;
+            })->addColumn('payment', function ($row) {
+                $html = '';
+                if ($row->type == 1 || ($row->type == 0 && $row->payment) ){
+                    $html = '<div class="custom-control custom-checkbox">
+                        <input class="custom-control-input" type="checkbox" id="customCheckbox2" checked="" disabled="">
+                        <label for="customCheckbox2" class="custom-control-label"></label>
+                        </div>';
+                } else{
+                    $html = '<div class="custom-control custom-checkbox">
+                        <input class="custom-control-input" type="checkbox" id="customCheckbox2" disabled="">
+                        <label for="customCheckbox2" class="custom-control-label"></label>
+                        </div>';
+                }
+                return $html;
+            })->rawColumns(['code', 'action', 'created_at', 'payment'])->toJson();
 
     }
 }

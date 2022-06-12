@@ -18,35 +18,18 @@
 
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3>4.2</h3>
-                            <p>Trên 3000 lượt đánh giá</p>
+                            <h3>{{ $qty_brand }}</h3>
+                            <p>thương hiệu</p>
                         </div>
                         <div class="icon">
                             <i class="fas fa-star"></i>
                         </div>
-                        <a href="#" class="small-box-footer">
+                        <a href="{{ action('App\Http\Controllers\brandController@getView') }}" class="small-box-footer">
                             Xem chi tiết <i class="fas fa-arrow-circle-right"></i>
                         </a>
                     </div>
                 </div>
 
-
-
-                <div class="col-lg-3 col-6">
-
-                    <div class="small-box bg-danger">
-                        <div class="inner">
-                            <h3>2</h3>
-                            <p>Báo lỗi</p>
-                        </div>
-                        <div class="icon">
-                            <i class="fa-solid fa-triangle-exclamation"></i>
-                        </div>
-                        <a href="#" class="small-box-footer">
-                            Xem chi tiết <i class="fas fa-arrow-circle-right"></i>
-                        </a>
-                    </div>
-                </div>
 
 
                 <div class="col-lg-3 col-6">

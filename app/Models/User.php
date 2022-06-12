@@ -53,4 +53,12 @@ class User extends Authenticatable
     public function bill(){
         return $this->hasMany(billModel::class,'user_id','id');
     }
+
+    public function verify(){
+        return $this->hasMany(verifyModel::class,'user_id','id');
+    }
+
+    public function resetPass(){
+        return $this->hasMany(passwordResetsModel::class,'email','email');
+    }
 }
