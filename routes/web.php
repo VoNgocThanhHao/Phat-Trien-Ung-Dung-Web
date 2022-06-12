@@ -183,6 +183,8 @@ Route::group(['middleware' => 'checkLogin'], function () {
 
             Route::get('/get-data-table', 'App\Http\Controllers\billController@getDataTableAdmin');
             Route::get('/get-data-table-for-user/{id_user}', 'App\Http\Controllers\billController@getDataTableAdminForUser');
+
+            Route::get('/xuat-hoa-don/{bill_id}','App\Http\Controllers\billController@getViewPDFAdmin');
         });
     });
 });
