@@ -97,7 +97,7 @@ class userController extends Controller
 
     public function deleteUser(Request $request)
     {
-//        try {
+        try {
             $profile = profileModel::where('user_id', $request->id)->first();
             $user = User::find($request->id);
 
@@ -106,11 +106,10 @@ class userController extends Controller
             $profile->delete();
             $user->delete();
             
-
-//            return ToolsModel::status('Tài khoản đã được xóa!', 200);
-//        } catch (\Exception $exception) {
-//            return ToolsModel::status('Máy chủ không phản hồi!', 500);
-//        }
+            return ToolsModel::status('Tài khoản đã được xóa!', 200);
+        } catch (\Exception $exception) {
+            return ToolsModel::status('Máy chủ không phản hồi!', 500);
+        }
     }
 
     public function changePassword(Request $request)
