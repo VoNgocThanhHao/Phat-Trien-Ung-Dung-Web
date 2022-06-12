@@ -67,6 +67,21 @@ class billController extends Controller
         return view('xml.exportPDF', ['bill' => $bill, 'total' => $total, 'ship' => $ship]);
     }
 
+    public function getViewPDFAdmin($bill_id)
+    {
+        $bill = billModel::find($bill_id);
+
+        $total = 0;
+        foreach ($bill->order as $order) {
+            $total += $order->quantity * $order->product->price;
+        }
+
+        $ship = 0;
+        if ($total <= 700000) $ship = 30000;
+
+        return view('xml.exportPDF', ['bill' => $bill, 'total' => $total, 'ship' => $ship]);
+    }
+
     public function addBill(Request $request)
     {
         try {

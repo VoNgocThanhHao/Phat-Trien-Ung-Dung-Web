@@ -132,7 +132,7 @@
                                         <a href="{{ action('App\Http\Controllers\billController@getViewAdmin') }}" class="btn btn-success float-right"><i class="far fa-credit-card"></i>
                                             Xác nhận
                                         </a>
-                                        <a href="{{ action('App\Http\Controllers\billController@getViewPDF', $bill->id) }}"
+                                        <a href="{{ action('App\Http\Controllers\billController@getViewPDFAdmin', $bill->id) }}"
                                            target="_blank" class="btn btn-primary" style="margin-right: 5px;">
                                             <i class="fas fa-download"></i> Xuất PDF
                                         </a>
