@@ -81,13 +81,9 @@
                             <br>
                             <b>Loại thanh toán:</b> {{ $bill->type == 0 ? 'Tiền mặt' : 'VNPay' }}<br>
                             <b>Ngày thanh toán:</b>
-                            @if($bill->type == 0)
                                 @if($bill->payment) {{ $bill->payment->format('d-m-Y') }}
                                 @else Chưa thanh toán
                                 @endif
-                            @else
-                                {{ $bill->created_at->format('d-m-Y') }}
-                            @endif
                             <br>
                         </div>
 
