@@ -103,8 +103,9 @@ class userController extends Controller
 
             if ($profile->image != 'public/mySource/imgs/avatars/unknow.jpg') \File::delete($profile->image);
 
-            $user->delete();
             $profile->delete();
+            $user->delete();
+            
 
 //            return ToolsModel::status('Tài khoản đã được xóa!', 200);
 //        } catch (\Exception $exception) {
