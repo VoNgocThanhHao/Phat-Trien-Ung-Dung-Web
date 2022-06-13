@@ -156,7 +156,7 @@ Route::group(['middleware' => 'checkLogin'], function () {
                 Route::get('/{id_user}', 'App\Http\Controllers\profileController@getView');
                 Route::post('/update/{id_user}', 'App\Http\Controllers\profileController@update');
             });
-        }
+        });
 
         Route::prefix('admin/san-pham/')->group(function () {
             Route::get('/', 'App\Http\Controllers\productController@getView');
