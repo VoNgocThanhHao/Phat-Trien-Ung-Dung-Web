@@ -13,6 +13,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class billController extends Controller
 {
@@ -32,6 +33,13 @@ class billController extends Controller
             }
             $ship = 0;
             if ($total <= 700000) $ship = 30000;
+
+            $email = Auth::user()->email;
+            Mail::send('xml.exportPDF', ['bill' => $bill, 'total' => $total, 'ship' => $ship], function ($message) use ($email) {
+                $message->to($email);
+                $message->subject('Kích hoạt tài khoản');
+            });
+
             return view('guest.transaction.transaction_bill', ['bill' => $bill, 'total' => $total, 'ship' => $ship]);
         }
 
