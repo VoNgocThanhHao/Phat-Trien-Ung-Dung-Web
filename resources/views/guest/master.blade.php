@@ -1049,6 +1049,7 @@
                     'Sản phẩm này đã hết, vui lòng quay lại sau!',
                     'warning'
                 )
+                return;
             }
 
             $('.imgProduct').attr('src', 'http://' + document.domain + '/' + img_link)
