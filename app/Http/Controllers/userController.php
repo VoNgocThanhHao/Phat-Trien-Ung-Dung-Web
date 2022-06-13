@@ -105,7 +105,7 @@ class userController extends Controller
 
             $profile->delete();
             $user->delete();
-            
+
             return ToolsModel::status('Tài khoản đã được xóa!', 200);
         } catch (\Exception $exception) {
             return ToolsModel::status('Máy chủ không phản hồi!', 500);
