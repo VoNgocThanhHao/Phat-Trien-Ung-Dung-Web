@@ -89,7 +89,7 @@
 
             $('#billTable').DataTable({
                 "responsive": true, "lengthChange": true, "autoWidth": false,
-                "serverSide": true, "ordering": false,
+                "serverSide": true,
                 "ajax": '{{ action('App\Http\Controllers\billController@getDataTableAdmin') }}',
                 "columns":
             [

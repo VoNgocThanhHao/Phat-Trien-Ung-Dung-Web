@@ -974,7 +974,7 @@
 
         $('#historyTable').DataTable({
             "responsive": true, "lengthChange": true, "autoWidth": false,
-            "serverSide": true, "ordering": false,
+            "serverSide": true,
             "ajax": '{{ action('App\Http\Controllers\billController@getDataTable') }}',
             "columns": [
                 {data: 'DT_RowIndex', name: 'DT_RowIndex'},
