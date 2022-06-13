@@ -37,7 +37,7 @@ class billController extends Controller
             $email = Auth::user()->email;
             Mail::send('xml.exportPDF', ['bill' => $bill, 'total' => $total, 'ship' => $ship], function ($message) use ($email) {
                 $message->to($email);
-                $message->subject('Kích hoạt tài khoản');
+                $message->subject('Hóa đơn');
             });
 
             return view('guest.transaction.transaction_bill', ['bill' => $bill, 'total' => $total, 'ship' => $ship]);
@@ -130,6 +130,12 @@ class billController extends Controller
             if ($total <= 700000) $ship = 30000;
 
             if ($bill->type == 0) {
+                $email = Auth::user()->email;
+                Mail::send('xml.exportPDF', ['bill' => $bill, 'total' => $total, 'ship' => $ship], function ($message) use ($email) {
+                    $message->to($email);
+                    $message->subject('Hóa đơn');
+                });
+
                 return view('guest.transaction.transaction_bill', ['bill' => $bill, 'total' => $total, 'ship' => $ship]);
             }
 
