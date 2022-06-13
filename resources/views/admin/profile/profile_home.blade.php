@@ -248,13 +248,13 @@
 
                 $('.modal-title').html("Đơn hàng #" + data.code)
 
-                if (data.type === 0){
+
                     if (data.payment){
                         $('#stt_bill').val(1)
                     }else{
                         $('#stt_bill').val(0)
                     }
-                }
+
 
                 $('.btnUpdate').attr('data',data.id)
 
