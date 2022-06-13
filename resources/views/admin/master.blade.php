@@ -195,6 +195,7 @@
                                     </ul>
                                 </li>
 
+                                @if(Auth::user()->permission == 3)
 
                                 <li class="nav-item">
                                     <a href="{{ action('App\Http\Controllers\userController@getView') }}" class="nav-link">
@@ -205,7 +206,7 @@
                                     </a>
                                 </li>
 
-
+                                @endif
 
 
                             </ul>

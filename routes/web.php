@@ -139,21 +139,24 @@ Route::group(['middleware' => 'checkLogin'], function () {
             Route::get('/datatable', 'App\Http\Controllers\brandController@getDataTable');
         });
 
-        Route::prefix('admin/nguoi-dung')->group(function () {
-            Route::get('/', 'App\Http\Controllers\userController@getView');
-            Route::put('/add', 'App\Http\Controllers\userController@addUser');
-            Route::post('/update', 'App\Http\Controllers\userController@updateUser');
-            Route::delete('/delete', 'App\Http\Controllers\userController@deleteUser');
+        Route::group(['middleware' => 'checkAdmin'], function () {
 
-            Route::post('/change-password', 'App\Http\Controllers\userController@changePassword');
-            Route::post('/check-email-update', 'App\Http\Controllers\userController@checkEmail_update');
-            Route::get('/datatable', 'App\Http\Controllers\userController@getDataTable');
-        });
+            Route::prefix('admin/nguoi-dung')->group(function () {
+                Route::get('/', 'App\Http\Controllers\userController@getView');
+                Route::put('/add', 'App\Http\Controllers\userController@addUser');
+                Route::post('/update', 'App\Http\Controllers\userController@updateUser');
+                Route::delete('/delete', 'App\Http\Controllers\userController@deleteUser');
 
-        Route::prefix('admin/thong-tin-ca-nhan')->group(function () {
-            Route::get('/{id_user}', 'App\Http\Controllers\profileController@getView');
-            Route::post('/update/{id_user}', 'App\Http\Controllers\profileController@update');
-        });
+                Route::post('/change-password', 'App\Http\Controllers\userController@changePassword');
+                Route::post('/check-email-update', 'App\Http\Controllers\userController@checkEmail_update');
+                Route::get('/datatable', 'App\Http\Controllers\userController@getDataTable');
+            });
+
+            Route::prefix('admin/thong-tin-ca-nhan')->group(function () {
+                Route::get('/{id_user}', 'App\Http\Controllers\profileController@getView');
+                Route::post('/update/{id_user}', 'App\Http\Controllers\profileController@update');
+            });
+        }
 
         Route::prefix('admin/san-pham/')->group(function () {
             Route::get('/', 'App\Http\Controllers\productController@getView');

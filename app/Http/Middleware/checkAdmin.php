@@ -18,7 +18,7 @@ class checkAdmin
     public function handle(Request $request, Closure $next)
     {
 
-        if (Auth::user()->permission != 2){
+        if (Auth::user()->permission == 2){
             return redirect(404);
         }
         return $next($request);
