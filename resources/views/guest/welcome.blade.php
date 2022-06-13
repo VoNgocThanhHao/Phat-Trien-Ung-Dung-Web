@@ -422,7 +422,6 @@
         </div>
         <div class="text">
             <h3>Không bao giờ dừng lại</h3>
-            <h4 class="text-white">Phong cách không có giới hạn</h4>
             <p>Không ai có thể quyết định được phong cách của riêng bạn.
             Phong cách của mỗi người là duy nhất. Hãy khiến bản thân mình hài lòng
             với sự giúp đỡ của chúng tôi. <br><br> <h4 class="text-white"> RẤT HÂN HẠNH ĐƯỢC LÀ MỘT PHẦN CỦA BẠN!</h4></p>
