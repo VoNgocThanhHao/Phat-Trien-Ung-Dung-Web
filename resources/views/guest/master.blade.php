@@ -1043,6 +1043,14 @@
             var data = jQuery.parseJSON($(this).attr('data'))
             var img_link = data.image
 
+            if (data.status === 0){
+                Swal.fire(
+                    'Rất tiếc!',
+                    'Sản phẩm này đã hết, vui lòng quay lại sau!',
+                    'warning'
+                )
+            }
+
             $('.imgProduct').attr('src', 'http://' + document.domain + '/' + img_link)
             $('.nameProduct').html(data.name)
 
