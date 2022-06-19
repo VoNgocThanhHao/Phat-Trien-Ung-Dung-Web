@@ -7,9 +7,6 @@
     {{--------------------------------------Datatable-------------------------------------------------}}
 
     <div class="card">
-        <div class="card-header">
-            <button type="button" class="btn btn-success btnAdd">Thêm</button>
-        </div>
 
         <div class="card-body">
 
