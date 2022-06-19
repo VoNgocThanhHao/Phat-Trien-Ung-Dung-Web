@@ -189,6 +189,21 @@ Route::group(['middleware' => 'checkLogin'], function () {
 
             Route::get('/xuat-hoa-don/{bill_id}','App\Http\Controllers\billController@getViewPDFAdmin');
         });
+
+        Route::prefix('admin/quan-ly-binh-luan/')->group(function () {
+            Route::get('/', 'App\Http\Controllers\commentController@getView');
+            Route::delete('/delete-binh-luan', 'App\Http\Controllers\commentController@deleteComment');
+
+            Route::get('/get-data-table', 'App\Http\Controllers\commentController@getDataTable');
+        });
+
+
+        Route::prefix('admin/thong-ke/')->group(function () {
+            Route::get('/', 'App\Http\Controllers\statisticalController@getView');
+
+            Route::get('/get-data-year', 'App\Http\Controllers\statisticalController@getSoSanh');
+            Route::get('/get-data-san-pham', 'App\Http\Controllers\statisticalController@getSanPham');
+        });
     });
 });
 

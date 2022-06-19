@@ -1044,24 +1044,33 @@
             var img_link = data.image
 
             if (data.status === 0){
-                Swal.fire(
-                    'Rất tiếc!',
-                    'Sản phẩm này đã hết, vui lòng quay lại sau!',
-                    'warning'
-                )
-                return;
+                Swal.fire({
+                    title: 'Sản phẩm đã hết?',
+                    text: "Nếu bạn vẫn muốn mua, có thể sẽ mất vài ngày để chúng tôi chuẩn bị. BẠN VẪN MUỐN?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Đồng ý'
+                    cancelButtonText: 'Hủy'
+                    reverseButtons: true,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $('.imgProduct').attr('src', 'http://' + document.domain + '/' + img_link)
+                        $('.nameProduct').html(data.name)
+
+                        var price = formatToCurrency(data.price).toString()
+                        price = price.slice(0, price.length - 3)
+                        $('.priceProduct').html(price)
+
+
+                        $('.btnBuyConfirm').attr('data', data.id)
+                        $('#modalBuy').modal('show')
+
+                    }
+                })
             }
 
-            $('.imgProduct').attr('src', 'http://' + document.domain + '/' + img_link)
-            $('.nameProduct').html(data.name)
-
-            var price = formatToCurrency(data.price).toString()
-            price = price.slice(0, price.length - 3)
-            $('.priceProduct').html(price)
-
-
-            $('.btnBuyConfirm').attr('data', data.id)
-            $('#modalBuy').modal('show')
             @endif
             @else
 
@@ -1080,28 +1089,47 @@
 
             var product_id = $(this).attr('data')
 
-            $.ajax({
-                url: '{{ action('App\Http\Controllers\favouriteController@addFavourite') }}',
-                type: "PUT",
-                data: {
-                    'product_id': product_id,
-                },
-                success: function (result) {
-                    result = JSON.parse(result);
-                    if (result.status === 200) {
-                        Toast.fire({
-                            icon: 'success',
-                            title: result.message
-                        })
-                        getCountFav()
-                    } else {
-                        Toast.fire({
-                            icon: 'warning',
-                            title: result.message
-                        })
+            if (data.status === 0){
+                Swal.fire({
+                    title: 'Sản phẩm đã hết?',
+                    text: "Nếu bạn vẫn muốn mua, có thể sẽ mất vài ngày để chúng tôi chuẩn bị. BẠN VẪN MUỐN?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Đồng ý'
+                    cancelButtonText: 'Hủy'
+                    reverseButtons: true,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+
+                        $.ajax({
+                            url: '{{ action('App\Http\Controllers\favouriteController@addFavourite') }}',
+                            type: "PUT",
+                            data: {
+                                'product_id': product_id,
+                            },
+                            success: function (result) {
+                                result = JSON.parse(result);
+                                if (result.status === 200) {
+                                    Toast.fire({
+                                        icon: 'success',
+                                        title: result.message
+                                    })
+                                    getCountFav()
+                                } else {
+                                    Toast.fire({
+                                        icon: 'warning',
+                                        title: result.message
+                                    })
+                                }
+                            }
+                        });
+
                     }
-                }
-            });
+                })
+            }
+
             @else
 
             $('.btnLoginModal').click()

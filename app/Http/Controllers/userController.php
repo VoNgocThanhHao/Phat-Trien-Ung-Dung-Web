@@ -37,9 +37,9 @@ class userController extends Controller
                         <label for="customCheckbox2" class="custom-control-label"></label>
                         </div>';
             })->addColumn('permission', function ($row) {
-                if ($row->permission == 1) $permission = 'Khách hàng';
-                elseif ($row->permission == 2) $permission = 'Nhân viên';
-                elseif ($row->permission == 3) $permission = 'Quản trị viên';
+                if ($row->permission == 1) $permission = '<span class="badge badge-secondary">Khách hàng</span>';
+                elseif ($row->permission == 2) $permission = '<span class="badge badge-warning">Nhân viên</span>';
+                elseif ($row->permission == 3) $permission = '<span class="badge badge-success">Quản trị viên</span>';
                 return $permission;
             })->addColumn('action', function ($row) {
                 $data = User::find($row->id)->toArray();
@@ -50,7 +50,7 @@ class userController extends Controller
                 $html .= '<div class="btn btn-outline-danger btn-sm btnDelete ml-2" data="' . $row->id . '"><i class="fa-solid fa-trash"></i> Xóa </div>';
                 return $html;
             })
-            ->rawColumns(['verified', 'action', 'name'])
+            ->rawColumns(['verified', 'action', 'name', 'permission'])
             ->toJson();
 
     }

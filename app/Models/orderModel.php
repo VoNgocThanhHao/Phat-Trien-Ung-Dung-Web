@@ -16,4 +16,8 @@ class orderModel extends Model
     public function product(){
         return $this->hasOne(productModel::class,'id','product_id');
     }
+
+    public function bill(){
+        return $this->belongsTo(billModel::class,'bill_id','id');
+    }
 }

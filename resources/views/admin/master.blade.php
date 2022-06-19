@@ -41,6 +41,8 @@
 
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css" rel="stylesheet">
+
     <style>
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
@@ -208,6 +210,24 @@
 
                                 @endif
 
+                                <li class="nav-item">
+                                    <a href="{{ action('App\Http\Controllers\commentController@getView') }}" class="nav-link">
+                                        <i class="nav-icon fa-solid fa-comment-dots"></i>
+                                        <p>
+                                            Bình luận
+                                        </p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="{{action('App\Http\Controllers\statisticalController@getView')}}" class="nav-link">
+                                        <i class="nav-icon fa-solid fa-magnifying-glass-chart"></i>
+                                        <p>
+                                            Thống kê
+                                        </p>
+                                    </a>
+                                </li>
+
 
                             </ul>
                         </nav>
@@ -301,6 +321,9 @@
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.4.0/socket.io.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/laravel-echo/1.11.0/echo.common.min.js"></script>
+
+<script src="{{asset("public/plugins/chart.js/Chart.min.js")}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js"></script>
 
 <script>
 
