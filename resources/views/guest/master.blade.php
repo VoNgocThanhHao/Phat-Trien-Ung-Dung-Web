@@ -1069,6 +1069,17 @@
 
                     }
                 })
+            }else{
+                $('.imgProduct').attr('src', 'http://' + document.domain + '/' + img_link)
+                $('.nameProduct').html(data.name)
+
+                var price = formatToCurrency(data.price).toString()
+                price = price.slice(0, price.length - 3)
+                $('.priceProduct').html(price)
+
+
+                $('.btnBuyConfirm').attr('data', data.id)
+                $('#modalBuy').modal('show')
             }
 
             @endif
