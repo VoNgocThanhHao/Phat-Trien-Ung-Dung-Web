@@ -1051,8 +1051,8 @@
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Đồng ý'
-                    cancelButtonText: 'Hủy'
+                    confirmButtonText: 'Đồng ý',
+                    cancelButtonText: 'Hủy',
                     reverseButtons: true,
                 }).then((result) => {
                     if (result.isConfirmed) {
@@ -1089,46 +1089,28 @@
 
             var product_id = $(this).attr('data')
 
-            if (data.status === 0){
-                Swal.fire({
-                    title: 'Sản phẩm đã hết?',
-                    text: "Nếu bạn vẫn muốn mua, có thể sẽ mất vài ngày để chúng tôi chuẩn bị. BẠN VẪN MUỐN?",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Đồng ý'
-                    cancelButtonText: 'Hủy'
-                    reverseButtons: true,
-                }).then((result) => {
-                    if (result.isConfirmed) {
-
-                        $.ajax({
-                            url: '{{ action('App\Http\Controllers\favouriteController@addFavourite') }}',
-                            type: "PUT",
-                            data: {
-                                'product_id': product_id,
-                            },
-                            success: function (result) {
-                                result = JSON.parse(result);
-                                if (result.status === 200) {
-                                    Toast.fire({
-                                        icon: 'success',
-                                        title: result.message
-                                    })
-                                    getCountFav()
-                                } else {
-                                    Toast.fire({
-                                        icon: 'warning',
-                                        title: result.message
-                                    })
-                                }
-                            }
-                        });
-
+            $.ajax({
+                url: '{{ action('App\Http\Controllers\favouriteController@addFavourite') }}',
+                type: "PUT",
+                data: {
+                    'product_id': product_id,
+                },
+                success: function (result) {
+                    result = JSON.parse(result);
+                    if (result.status === 200) {
+                        Toast.fire({
+                            icon: 'success',
+                            title: result.message
+                        })
+                        getCountFav()
+                    } else {
+                        Toast.fire({
+                            icon: 'warning',
+                            title: result.message
+                        })
                     }
-                })
-            }
+                }
+            });
 
             @else
 
